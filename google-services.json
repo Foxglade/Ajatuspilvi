@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1060750013033",
+    "project_id": "ajatuspilvi",
+    "storage_bucket": "ajatuspilvi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1060750013033:android:e63df757425b203534a8f8",
+        "android_client_info": {
+          "package_name": "Ajatuspilvi.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1060750013033-2ht072jg8np57hm0pjba75v8pn8n7d4g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcTPFfMaqIe-5N2O0gzc4LNluMlD_YaFk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1060750013033-2ht072jg8np57hm0pjba75v8pn8n7d4g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
