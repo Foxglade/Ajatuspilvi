@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const Comments = ({ message, sender }) => {
+console.log('Received message:', message);
+  console.log('Received sender:', sender);
   return (
     <View style={styles.commentContainer}>
       <Text style={styles.sender}>{sender}</Text>
@@ -23,11 +25,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 5,
     marginLeft: 5,
+    color: '#000',
   },
   message: {
     fontSize: 16,
     marginLeft: 20,
     marginBottom: 5,
+    color: '#000',
   },
 });
 

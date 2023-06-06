@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Button, StyleSheet, Image, ImageBackground, TextInput } from 'react-native';
 import io from 'socket.io-client';
 
-const socket = io('https://mindcloud.herokuapp.com/');
+const socket = io('https://ajatuspilvi1servu.herokuapp.com');
 
 import Comments from '../components/Comments';
 
@@ -10,12 +10,11 @@ export default function Home() {
   const [message, setMessage] = useState('');
   const [comments, setComments] = useState([]);
 
-  useEffect(() => {
-     // Replace with your server IP address
-
-    socket.on('chat message', (msg) => {
-      setComments((prevComments) => [...prevComments, msg]);
-    });
+      useEffect(() => {
+        socket.on('chat message', (msg) => {
+          console.log('Received Message Info:', msg);
+          setComments((prevComments) => [...prevComments, msg]);
+        });
 
     return () => {
       socket.disconnect();
@@ -26,15 +25,16 @@ export default function Home() {
     setMessage(text);
   };
 
-  const handleSubmit = () => {
-    if (message) {
-      // Emit the message to the server
-      socket.emit('chat message', message);
-
-      // Clear the input field
-      setMessage('');
-    }
-  };
+ const handleSubmit = () => {
+   if (message) {
+     const newMessage = {
+       sender: 'Your Sender',
+       message: message,
+     };
+     socket.emit('chat message', newMessage);
+     setMessage('');
+   }
+ };
 
 
   return (
@@ -42,18 +42,19 @@ export default function Home() {
       <ImageBackground source={require('../wallpaper.jpg')} style={styles.imageBackground}>
         <View style={styles.content}>
           {comments.map((comment, index) => (
-            <Comments key={index} message={comments} sender="User" />
+            <Comments key={index} sender={comment.sender} message={comment.message} />
           ))}
         </View>
+
 
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
-            placeholder="Type your message"
+            placeholder="Type your message..."
             value={message}
             onChangeText={handleMessageChange}
           />
-          <Button style={styles.sendbtn} title="Send" onPress={handleSubmit} />
+          <Button title="Send" onPress={handleSubmit} />
         </View>
       </ImageBackground>
     </View>
@@ -65,7 +66,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
   },
   imageBackground: {
     flex: 1,
@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     justifyContent: 'flex-end',
+    color: '#000'
   },
   commentContainer: {
     backgroundColor: '#FFF',
@@ -88,11 +89,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 5,
     marginLeft: 5,
+    color: '#000',
   },
   message: {
     fontSize: 16,
     marginLeft: 20,
     marginBottom: 5,
+    color: '#000',
   },
   inputContainer: {
     flexDirection: 'row',
